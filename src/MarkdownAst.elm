@@ -9,14 +9,16 @@ module MarkdownAst exposing
 
 {-| This module provides abstruct syntax tree for markdown.
 
--- Structure
+
+# Structure
 
 @docs Section
 @docs BlockElement
 @docs InlineElement
 @docs ListItem
 
--- Render
+
+# Render
 
 @docs render
 @docs preview
@@ -117,7 +119,7 @@ type alias ListItem =
 
 
 
--- Renderer
+-- # Renderer
 
 
 {-| Render `Section` as markdown text.
@@ -581,7 +583,7 @@ escapeDoubleQuote =
 
 
 
--- Preview
+-- # Preview
 
 
 {-| Preview markdown content as an HTML page.
