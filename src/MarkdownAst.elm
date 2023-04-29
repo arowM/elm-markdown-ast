@@ -680,7 +680,9 @@ previewBlock block =
                                 |> List.take (List.length bs - 1)
                             )
             in
-            List.map Html.text codeLines
+            [ Html.text <|
+                String.join "\n" codeLines
+            ]
                 |> Html.code [ Attributes.attribute "data-code-header" header ]
                 |> List.singleton
                 |> Html.pre []
