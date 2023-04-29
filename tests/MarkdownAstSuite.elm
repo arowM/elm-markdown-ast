@@ -27,6 +27,12 @@ Markdown AST represents *Markdown* AST.
 
     1\\. dummy ordered list item
 
+    ```text
+    type builder parent elem =
+        ...
+        ...
+    ```
+
     ```elm
     type Builder parent elem =
         ...

@@ -221,9 +221,24 @@ blockToString context block =
                             ( "", [] )
 
                         h :: bs ->
+                            let
+                                rawBody =
+                                    trimIndent bs
+
+                                hasEmptyLastLine =
+                                    List.drop
+                                        (List.length rawBody - 1)
+                                        rawBody
+                                        == [ "" ]
+                            in
                             ( String.trim h
-                            , trimIndent bs
-                                |> List.take (List.length bs - 1)
+                            , rawBody
+                                |> (if hasEmptyLastLine then
+                                        List.take (List.length rawBody - 1)
+
+                                    else
+                                        identity
+                                   )
                             )
 
                 backslashes : Int
@@ -675,9 +690,24 @@ previewBlock block =
                             ( "", [] )
 
                         h :: bs ->
+                            let
+                                rawBody =
+                                    trimIndent bs
+
+                                hasEmptyLastLine =
+                                    List.drop
+                                        (List.length rawBody - 1)
+                                        rawBody
+                                        == [ "" ]
+                            in
                             ( String.trim h
-                            , trimIndent bs
-                                |> List.take (List.length bs - 1)
+                            , rawBody
+                                |> (if hasEmptyLastLine then
+                                        List.take (List.length rawBody - 1)
+
+                                    else
+                                        identity
+                                   )
                             )
             in
             [ Html.text <|

@@ -58,10 +58,9 @@ myMarkdown =
                                         ]
                                     , Ast.CodeBlock
                                         """text
-                                    type Builder parent elem =
+                                    type builder parent elem =
                                         ...
-                                        ...
-                                    """
+                                        ..."""
                                     , Ast.CodeBlock
                                         """elm
                                     type Builder parent elem =
