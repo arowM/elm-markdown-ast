@@ -365,7 +365,7 @@ normalizePlainText rawStr =
           else
             []
         , words
-        , if hasLastSpace then
+        , if not hasHeadSpace && hasLastSpace then
             [ "" ]
 
           else
@@ -384,9 +384,15 @@ escapeDummyOrderedList str =
             (\c context ->
                 case context.digits of
                     Nothing ->
-                        { acc = String.cons c context.acc
-                        , digits = Nothing
-                        }
+                        if Char.isDigit c then
+                            { acc = context.acc
+                            , digits = Just <| String.fromChar c
+                            }
+
+                        else
+                            { acc = String.cons c context.acc
+                            , digits = Nothing
+                            }
 
                     Just digits ->
                         if Char.isDigit c then
@@ -396,12 +402,12 @@ escapeDummyOrderedList str =
                             }
 
                         else if c == '.' then
-                            { acc = ".\\" ++ digits
+                            { acc = ".\\" ++ digits ++ context.acc
                             , digits = Nothing
                             }
 
                         else
-                            { acc = String.cons c digits
+                            { acc = String.cons c digits ++ context.acc
                             , digits = Nothing
                             }
             )
@@ -409,7 +415,7 @@ escapeDummyOrderedList str =
             , digits = Just "" -- reversed
             }
             str
-            |> .acc
+            |> (\o -> Maybe.withDefault "" o.digits ++ o.acc)
             |> String.reverse
 
 

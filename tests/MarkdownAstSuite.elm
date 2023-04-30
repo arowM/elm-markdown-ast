@@ -38,7 +38,7 @@ Markdown AST represents *Markdown* AST.
         ...
         ...
     ```
-* List Item 3
+* **List** **Item** 3
 
     > [Child paragraph](./bar "title here").
     >

@@ -70,7 +70,10 @@ myMarkdown =
                                     ]
                               }
                             , { content =
-                                    [ Ast.PlainText "List Item 3"
+                                    [ Ast.StrongEmphasis "List"
+                                    , Ast.PlainText " "
+                                    , Ast.StrongEmphasis "Item"
+                                    , Ast.PlainText " 3"
                                     ]
                               , children =
                                     [ Ast.QuoteBlock
