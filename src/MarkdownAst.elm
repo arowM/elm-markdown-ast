@@ -343,7 +343,12 @@ normalizePlainText rawStr =
 
         hasLastSpace =
             String.right 1 rawStr
-                |> String.any isWhiteSpace
+                -- `|> String.any isWhiteSpace` may cause infinite loop
+                |> String.foldl
+                    (\c acc ->
+                        acc || isWhiteSpace c
+                    )
+                    False
 
         words =
             case normalizedWords rawStr of
