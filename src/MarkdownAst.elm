@@ -28,7 +28,6 @@ module MarkdownAst exposing
 import Html exposing (Html)
 import Html.Attributes as Attributes
 import Internal exposing (headTicks, inlineTicks, trimIndent)
-import Url
 
 
 {-| Represents markdown section.
@@ -648,7 +647,13 @@ previewHeader : Int -> String -> Html msg
 previewHeader n str =
     let
         attr =
-            [ Attributes.id <| Url.percentEncode str
+            [ String.words str
+                |> List.map
+                    (String.filter Char.isAlphaNum
+                        >> String.toLower
+                    )
+                |> String.join "-"
+                |> Attributes.id
             ]
     in
     case n of
